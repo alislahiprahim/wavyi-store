@@ -1,0 +1,27 @@
+<form class="my-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-envelope"></i>
+        <input type="text" formControlName="userName" placeholder="{{ 'User name' | translate }}" class="form-control" />
+        <app-alerts *ngIf="userName.invalid && (userName.dirty || userName.touched) && userName.errors['required']" [type]="2" [message]="'User name is required.'"></app-alerts>
+
+    </div>
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-lock"></i>
+        <input type="password" #pass formControlName="password" placeholder="{{ 'Password' | translate }}" class="form-control" />
+        <i id="eye" class="bi bi-eye-slash" (click)="togglePassIcon(pass)" [ngClass]="{
+  'fa-eye': pass.type == 'text',
+  'fa-eye-slash': pass.type == 'password'
+}"></i>
+        <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+            <app-alerts *ngIf="password.errors['required']" [type]="2" [message]="'Password is required.'"></app-alerts>
+            <app-alerts *ngIf="password.errors['pattern']" [type]="2" [message]="'Please enter a valid password'"></app-alerts>
+
+        </ng-container>
+
+    </div>
+    <div class="st-input-field">
+        <input name="remember-me" type="checkbox" #remember_me />
+        <label for="remember-me" (click)="remember_me.checked = !remember_me.checked"><a>{{ "Remember me"|translate }}</a></label>
+    </div>
+    <button type="submit" [disabled]="loginForm.invalid" class="auth-btn">{{'Sign in' | translate}}</button>
+</form>

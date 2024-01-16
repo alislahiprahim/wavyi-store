@@ -1,0 +1,19 @@
+     <div #alert class="mt-1 alert d-flex align-items-center alert-dismissible fade show" role="alert"
+     [ngClass]="
+        {
+            'alert-success':type==1,
+            'alert-danger':type==2,
+            'alert-info':type==3,
+            'alert-warning':type==4,
+    }"
+     >
+     <i class="flex-shrink-0 me-2 bi " [ngClass]="
+     {
+         'bi-check-circle-fill':type==1,
+         'bi-exclamation-triangle-fill':type==2 || type==4,
+         'bi-info-fill':type==3,
+        }"></i>
+        <div>{{message}}</div>
+        <!-- <button type="button" class="btn-close" (click)="close(alert)"></button> -->
+    </div>
+  

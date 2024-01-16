@@ -1,0 +1,13 @@
+<div class="dropdown-container" (mouseenter)="showDropdown=true" (mouseleave)="showDropdown=false">
+    {{itemTitle}} <i class="bi bi-chevron-down"></i>
+    <div class="dropdown-content" *ngIf="showDropdown" [@slideUpDown]>
+        <ng-container *ngFor="let item of menuItems">
+            <div class="submenu-container" (mouseenter)="showSubmenu=true" (mouseleave)="showSubmenu=false">
+                {{ item.title }} <i *ngIf="item.children" class="bi bi-chevron-right"></i>
+                <div class="submenu-content" *ngIf="item.children&&showSubmenu" [@FadeInOut]>
+                    <a *ngFor="let subItem of item.children" (click)="this.localStorageConfig.navigate(subItem.path,'',subItem.queryParams)">{{ subItem.title }} </a>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

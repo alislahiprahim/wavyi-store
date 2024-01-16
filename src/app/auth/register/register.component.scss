@@ -1,0 +1,28 @@
+form {
+    width: 100%;
+}
+
+.st-input-field {
+    margin: 10px 0;
+}
+
+.auth-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    color: #fff;
+    font-size: medium;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    background: var(--theme-primary);
+    box-shadow: 0px 0px 17px -9px rgba(0, 0, 0, 1);
+    &:hover {
+        box-shadow: none;
+        transition: border 0.2s ease-in-out;
+    }
+    &:disabled {
+        pointer-events: none;
+        box-shadow: none;
+    }
+}

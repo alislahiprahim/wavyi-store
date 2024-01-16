@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white" [class.fixed]="isNavbarFixed">
+    <div class="container-fluid">
+        <a class="navbar-brand" (click)="localStorageConfig.navigate('')">
+            <img [src]="localStorageConfig.storeSettings.imageUrl | imgBaseUrl" onerror="this.src='assets/images/placeholder/2.png'" alt="Logo">
+            <!-- <span>{{localStorageConfig.storeSettings.storeName}}</span> -->
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item" (click)="localStorageConfig.navigate('')">
+                    <a class="nav-link ">{{'Home' }}</a>
+                </li>
+                <app-dropdown *ngIf="categoryService.items().length" class="nav-item pt-2" [itemTitle]="'Categories'" [menuItems]="categoryService.items()"></app-dropdown>
+
+                <li class="nav-item" (click)="localStorageConfig.navigate('/products','',{sortBy:'ByAddedDateDesc'})" [routerLinkActive]="'active'">
+                    <a class="nav-link">{{'New arrival' }}</a>
+                </li>
+                <li class="nav-item" (click)="localStorageConfig.navigate('/products','',{sortBy:'ByBestSale'})" [routerLinkActive]="'active'">
+                    <a class="nav-link">{{'Best selling' }}</a>
+                </li>
+                <!-- <li class="nav-item" (click)="localStorageConfig.navigate('/products','',{sortBy:'0'})" [routerLinkActive]="'active'">
+                  <a class="nav-link">{{'Products' |}}</a>
+              </li> -->
+                <!-- Add more navigation links here -->
+            </ul>
+        </div>
+        <!-- <div class="navbar-icons">
+          <a class="position-relative" (click)="cartOverlay.open()"><i class="bi bi-bag"></i><span
+                  class="badge-item">{{(cartService.cartItems$|async).length}}</span> </a>
+          <app-popover [isHover]="0" [styles]="'padding: 0; right:0px;min-width:130px'" #popover>
+              <a class="clickable" popoverAction (click)="popover.toggle()"><i class="bi bi-person-circle"></i></a>
+              <div popoverContent class="w-100" *ngIf="!localStorageConfig.Token">
+                  <div class="d-flex flex-column w-100 align-items-start justify-content-center px-2">
+                      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="openAuth('login')">
+                          <i class="bi bi-box-arrow-in-right"></i> {{'Login'}}
+                      </div>
+                      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="openAuth('register')">
+                          <i class="bi bi-person-plus"></i> {{'Register'}}
+                      </div>
+                  </div>
+              </div>
+              <div popoverContent class="w-100" *ngIf="localStorageConfig.Token">
+                  <div class="d-flex flex-column w-100 align-items-start justify-content-center px-2">
+                      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="localStorageConfig.navigate('/profile','1')">
+                          <i class="bi bi-person"></i> {{'Profile'}}
+                      </div>
+                      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="localStorageConfig.navigate('/profile','1')">
+                          <i class="bi bi-clipboard"></i> {{'Orders'}}
+                      </div>
+                      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="logOut()">
+                          <i class="bi bi-box-arrow-in-left"></i> {{'Logout'}}
+                      </div>
+                  </div>
+              </div>
+          </app-popover>
+           <i class="bi bi-filter-right " (click)="overlay.open()"></i>
+      </div> -->
+    </div>
+</nav>

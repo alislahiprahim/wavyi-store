@@ -1,0 +1,40 @@
+.modal-header {
+    padding: 1rem 1rem 0 1rem;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #00000000;
+}
+
+.nav-item,
+.nav-link {
+    background-color: transparent;
+    outline: none;
+    color: var(--theme-text-color);
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+}
+
+.nav-link {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        bottom: 0;
+        left: 1.25rem;
+        width: calc(100% - (1.25rem * 2));
+        height: 1px;
+        transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, border-color 0.25s ease-in-out;
+        background-color: rgba(0, 0, 0, 0);
+        content: "";
+    }
+}
+
+.nav-link.active {
+    color: var(--theme-primary);
+    &::before {
+        background-color: var(--theme-primary);
+    }
+}

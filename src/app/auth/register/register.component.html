@@ -1,0 +1,60 @@
+<form class="my-4" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-envelope"></i>
+        <input type="email" formControlName="email" placeholder="{{ 'Email' | translate }}" class="form-control" />
+        <ng-container *ngIf="email.invalid && (email.dirty || email.touched)">
+            <app-alerts *ngIf="email.errors.required" [type]="2" [message]="'Email is required.'"></app-alerts>
+            <app-alerts *ngIf="email.errors.email" [type]="2" [message]="'Please enter a valid email.'"></app-alerts>
+        </ng-container>
+    </div>
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-person"></i>
+        <input type="text" formControlName="fullName" placeholder="{{ 'Name' | translate }}" class="form-control" />
+        <ng-container *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+            <app-alerts *ngIf="fullName.errors.required" [type]="2" [message]="'Name is required.'"></app-alerts>
+        </ng-container>
+    </div>
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-person"></i>
+        <input inputmode="numeric" formControlName="phone" placeholder="{{ 'Mobile number' | translate }}" class="form-control" />
+        <ng-container *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+            <app-alerts *ngIf="phone.errors.required" [type]="2" [message]="'Mobile number is required.'"></app-alerts>
+            <app-alerts *ngIf="phone.errors.pattern" [type]="2" [message]="'Please enter a valid mobile number'"></app-alerts>
+        </ng-container>
+    </div>
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-person"></i>
+        <input type="date" formControlName="dateOfBirth" placeholder="{{ 'Date of birth' | translate }}" class="form-control" />
+        <ng-container *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)">
+            <app-alerts *ngIf="dateOfBirth.errors.required" [type]="2" [message]="'Name is required.'"></app-alerts>
+        </ng-container>
+    </div>
+    <div class="st-input-field">
+        <i class="w-field-icon bi bi-lock"></i>
+        <input type="password" #pass formControlName="password" placeholder="{{ 'Password' | translate }}" class="form-control" />
+        <i id="eye" class="bi bi-eye-slash" (click)="togglePassIcon(pass)" [ngClass]="{
+  'fa-eye': pass.type == 'text',
+  'fa-eye-slash': pass.type == 'password'
+}"></i>
+        <small class="form-text text-muted">{{'Please ensure your password'| translate}} ( {{'Contains a combination of letters and numbers.'| translate}}, {{'Consists of at least 6 characters.' | translate}} )</small>
+        <ng-container *ngIf="password.invalid && (password.dirty || password.touched)">
+            <app-alerts *ngIf="password.errors.required" [type]="2" [message]="'Password is required.'"></app-alerts>
+            <app-alerts *ngIf="password.errors.pattern" [type]="2" [message]="'Please enter a valid password'"></app-alerts>
+        </ng-container>
+    </div>
+    <div class="st-input-field">
+        <div class="form-group d-flex align-items-center gap-2">
+
+            <label for="inlineRadio1">{{'Gender'|translate}}</label>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="male" type="radio" formControlName="gender" value="male">
+                <label class="form-check-label" for="male">{{'male'|translate}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" id="female" type="radio" formControlName="gender" value="female">
+                <label class="form-check-label" for="female">{{'female' | translate}}</label>
+            </div>
+        </div>
+    </div>
+    <button class="auth-btn" type="submit" [disabled]="registerForm.invalid">{{'Sign Up' | translate}}</button>
+</form>
