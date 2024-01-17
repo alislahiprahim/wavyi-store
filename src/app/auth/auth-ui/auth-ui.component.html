@@ -2,10 +2,10 @@
     <div class="modal-header  w-100  d-flex align-items-center justify-content-between">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <button class="nav-link" (click)="type='login'" [class.active]="type=='login'"><i class="bi bi-box-arrow-in-right"></i> {{'Sign in' | translate}}</button>
+                <button class="nav-link" (click)="type='login'" [class.active]="type=='login'"><i class="bi bi-box-arrow-in-right"></i> {{'Sign in' }}</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" (click)="type='register'" [class.active]="type=='register'"><i class="bi bi-person"></i> {{'Sign up' | translate}}</button>
+                <button class="nav-link" (click)="type='register'" [class.active]="type=='register'"><i class="bi bi-person"></i> {{'Sign up' }}</button>
             </li>
         </ul>
         <i class="bi bi-x-lg clickable" (click)="activeModal.close()"></i>

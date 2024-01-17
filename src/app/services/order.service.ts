@@ -1,7 +1,7 @@
-import { LocalStorageConfigService } from 'src/app/core/services/localStorageConfig.service';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LocalStorageConfigService } from './localStorageConfig.service';
 
 const state = {
   checkoutItems: JSON.parse(localStorage['checkoutItems'] || '[]')

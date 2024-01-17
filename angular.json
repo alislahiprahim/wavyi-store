@@ -31,8 +31,9 @@
                         ],
                         "styles": [
                             "src/assets/icons/brands.min.css",
-                            "src/assets/icons/fontawesome.min.css",
                             "src/assets/icons/solid.min.css",
+                            "src/assets/icons/regular.min.css",
+                            "src/assets/icons/fontawesome.min.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/styles.scss"
                         ],
@@ -66,8 +67,8 @@
                               {
                                 "replace": "src/environments/environment.ts",
                                 "with": "src/environments/environment.development.ts"
-                              }
-                            ]
+                            }
+                          ]
                         }
                     },
                     "defaultConfiguration": "production"
@@ -105,8 +106,9 @@
                         ],
                         "styles": [
                             "src/assets/icons/brands.min.css",
-                            "src/assets/icons/fontawesome.min.css",
+                            "src/assets/icons/regular.min.css",
                             "src/assets/icons/solid.min.css",
+                            "src/assets/icons/fontawesome.min.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/styles.scss"
                         ],

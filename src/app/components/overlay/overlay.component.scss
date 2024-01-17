@@ -1,0 +1,86 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    height: 100%;
+    background-color: transparent;
+    /* Semi-transparent background */
+    display: flex;
+    justify-content: flex-start;
+    z-index: 1000;
+    overflow-y: auto;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    /* Add box shadow here */
+}
+
+.overlay-right {
+    right: -150%;
+}
+
+.overlay-left {
+    left: -150%;
+}
+
+.overlay::-webkit-scrollbar {
+    display: none;
+}
+
+.overlay-content {
+    /* Background color of the content */
+    min-width: 250px;
+    width: 320px;
+    max-width: 350px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 8890;
+    position: relative;
+    overflow-y: auto;
+}
+
+.overlay-content::-webkit-scrollbar {
+    display: none;
+}
+
+.bi-x-circle {
+    float: right;
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    font-size: 1.4rem;
+    padding: 10px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.overlay-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+    cursor: crosshair;
+}
+
+.overlay-backdrop-show {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (width < 480px) {
+    .bi-x-circle {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+@media (width < 350px) {
+    .bi-x-circle {
+        padding: 20px 75px;
+    }
+}

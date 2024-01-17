@@ -87,7 +87,7 @@ export class AuthService {
   }
 
   migrateAnonymous() {
-    this.reqBase.post<any>(`${URLS.ANONYMOUS_USER}/${this.localStorageConfig.anonyomousUserId}`, {}).pipe(mergeMap((res) => this.CartService.getCartItems()))
+    this.reqBase.post<any>(`${URLS.ANONYMOUS_USER}/${this.localStorageConfig.anonyomousUserId}`, {}).subscribe(((res) => this.CartService.getCartItems()))
 
     // .subscribe({
     //   next: (res) => {

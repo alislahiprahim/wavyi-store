@@ -1,9 +1,10 @@
 import { LoaderService } from './../loader.service';
-import { Injectable } from "@angular/core";
+import { Inject, Injectable, PLATFORM_ID } from "@angular/core";
 import { ApiResponse } from "../../interfaces/response";
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, catchError, finalize, throwError } from "rxjs";
 import { environment } from "../../../environments/environment.development";
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +13,20 @@ import { environment } from "../../../environments/environment.development";
 export class RequestBase {
 
   private apiUrl = environment.apiURL;
+  private headers: any;
+  private hostName: string = ''
+  // Add a default header
 
-  constructor(private http: HttpClient, private loaderService: LoaderService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private http: HttpClient, private loaderService: LoaderService) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.hostName = location.host.split('.')[0]
+    }
+  }
 
   private getRequestOptions(headers?: HttpHeaders, params?: HttpParams): Object {
+    const mergedHeaders = headers ? { ...headers, 'X-Subdomain': this.hostName } : { 'X-Subdomain': this.hostName };
     return {
-      headers: headers || new HttpHeaders(),
+      headers: mergedHeaders,
       params: params || new HttpParams()
     };
   }
@@ -28,7 +37,6 @@ export class RequestBase {
     if (enableLoader) {
       this.startLoader();
     }
-
     return this.http.get<ApiResponse<T>>(`${this.apiUrl}/${url}`, options)
       .pipe(
         catchError(this.handleError),
@@ -105,12 +113,12 @@ export class RequestBase {
   }
 
   private startLoader(): void {
-    this.loaderService.loading$.next(true)
+    this.loaderService.loading$.set(true)
     console.log('Loader started');
   }
 
   private stopLoader(): void {
-    this.loaderService.loading$.next(false)
+    this.loaderService.loading$.set(false)
     console.log('Loader stopped');
   }
 }

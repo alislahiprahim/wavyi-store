@@ -1,0 +1,17 @@
+<div class="overlay-backdrop" (click)="close()" [class.overlay-backdrop-show]="isVisible"></div>
+<div *ngIf="this.position =='left'" class="overlay" [@slideInOutLeft]="isVisible ? 'in' : 'out'">
+    <div class="overlay-content" [style]="styles">
+        <i *ngIf="showClose" class="bi bi-x-circle" (click)="close()"></i>
+        <div class="clearfix h-100">
+            <ng-content select="[overlayContent]"></ng-content>
+        </div>
+    </div>
+</div>
+<div *ngIf="this.position =='right'" class="overlay overlay-right" [@slideInOutRight]="isVisible ? 'in' : 'out'">
+    <div class="overlay-content" [style]="styles">
+        <i *ngIf="showClose" class="bi bi-x-circle" style="float: none;" (click)="close()"></i>
+        <div class="h-100">
+            <ng-content select="[overlayContentRight]"></ng-content>
+        </div>
+    </div>
+</div>

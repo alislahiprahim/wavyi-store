@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertsComponent } from '../../components/alerts/alerts.component';
 import { AuthService } from '../../services/auth.service';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, AlertsComponent]
+  imports: [FormsModule, ReactiveFormsModule, AlertsComponent, NgIf, NgClass]
 })
 export class LoginComponent implements OnInit {
 

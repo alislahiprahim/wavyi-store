@@ -65,7 +65,7 @@ export class LocalStorageConfigService {
     return storeData?.storeCurrencySymbol ?? 'L.E';
   }
 
-  navigate(url: string, params?: any, queryParams?: Record<string, string>) {
+  navigate(url: string, params?: any, queryParams?: Record<string, string | undefined>) {
     if (!url) {
       this.router.navigate(['/']);
       return

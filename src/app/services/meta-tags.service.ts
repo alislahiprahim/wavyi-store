@@ -9,7 +9,7 @@ export class MetaTagsService {
 
   storeName: string = ''
   constructor(private title: Title, private meta: Meta, private localStorageConfig: LocalStorageConfigService) {
-    this.storeName = this.localStorageConfig.storeSettings.storeName
+    // this.storeName = this.localStorageConfig.storeSettings.storeName
   }
 
   setMetaData(title: string, description: string, setStoreName: boolean = false) {

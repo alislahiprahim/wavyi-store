@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { AlertsComponent } from '../../components/alerts/alerts.component';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, AlertsComponent]
+  imports: [FormsModule, ReactiveFormsModule, AlertsComponent, NgIf, NgClass]
 })
 export class RegisterComponent implements OnInit {
 

@@ -14,7 +14,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 })
 export class AppComponent {
   title = 'wavyi-store';
-  loading$: BehaviorSubject<boolean> = inject(LoaderService).loading$
+  loading$ = inject(LoaderService).loading$
 
   constructor() { }
 }

@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { ThemeService } from './services/theme.service';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { VALUES } from './constant/values';
 
@@ -21,7 +21,8 @@ export const appConfig: ApplicationConfig = {
       }),
     ),
     provideHttpClient(
-      withInterceptorsFromDi()
+      withInterceptorsFromDi(),
+      withFetch()
     ),
     provideRouter(routes),
     provideClientHydration(),

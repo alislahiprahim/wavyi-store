@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
 @Injectable({
@@ -6,5 +6,5 @@ import { BehaviorSubject } from "rxjs";
 })
 
 export class LoaderService {
-  loading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loading$ = signal<boolean>(false)
 }
