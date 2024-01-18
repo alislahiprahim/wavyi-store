@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from "@angular/common";
-import { Injectable, PLATFORM_ID, Inject } from "@angular/core";
+import { Injectable, PLATFORM_ID, Inject, signal } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Subject } from "rxjs";
 import { VALUES } from "../constant/values";
@@ -9,7 +9,7 @@ import { VALUES } from "../constant/values";
 export class LocalStorageConfigService {
 
   isBrowser: boolean = false;
-  loadingStore: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  loadingStore = signal<boolean>(false);
 
   constructor(private router: Router, @Inject(PLATFORM_ID) platformId: Object,) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -56,8 +56,7 @@ export class LocalStorageConfigService {
   }
 
   get storeSettings() {
-    return { imageUrl: '', storeId: '' }
-    // return JSON.parse((this.isBrowser && localStorage.getItem(VALUES.STORE_DATA) || ''));
+    return JSON.parse((this.isBrowser && localStorage.getItem(VALUES.STORE_DATA) || '{}'));
   }
 
   get currency(): string {

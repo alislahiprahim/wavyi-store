@@ -103,7 +103,7 @@ export class RequestBase {
   }
 
   private handleError(error: HttpErrorResponse): Observable<ApiResponse<any>> {
-    const errorMessage = error.error instanceof ErrorEvent ? error.error.message : 'Server error';
+    const errorMessage = error.error ? error.error.message : 'Server error';
     return throwError({
       success: false,
       message: errorMessage,

@@ -1,4 +1,10 @@
 @if((loading$())){
 <app-loader></app-loader>
 }
-<router-outlet></router-outlet>
+@if(!localstorgConfig.loadingStore()){
+    <router-outlet></router-outlet>
+}@else{
+<div style="height: 100vh; display: grid;place-items: center;">
+<p class="text-center fs-1">Loading...</p>
+</div>
+}

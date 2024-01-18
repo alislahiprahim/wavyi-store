@@ -5,7 +5,7 @@
             <div class="submenu-container" (mouseenter)="showSubmenu=true" (mouseleave)="showSubmenu=false">
                 {{ item.title }} <i *ngIf="item.children" class="bi bi-chevron-right"></i>
                 <div class="submenu-content" *ngIf="item.children&&showSubmenu" [@FadeInOut]>
-                    <a *ngFor="let subItem of item.children" (click)="this.localStorageConfig.navigate(subItem.path,'',subItem.queryParams)">{{ subItem.title }} </a>
+                    <a *ngFor="let subItem of item.children" (click)="localStorageConfig.navigate(subItem.path,'',subItem.queryParams)">{{ subItem.title }} </a>
                 </div>
             </div>
         </ng-container>

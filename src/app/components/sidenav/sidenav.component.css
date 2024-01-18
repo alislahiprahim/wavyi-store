@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+a {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #333;
+  font-size: 1.2rem;
+  text-decoration: none;
+  /* Remove underline from icons */
+}

@@ -1,0 +1,58 @@
+<a class="position-relative" (click)="cartOverlay.open()"><i class="fa-solid fa-bag-shopping"></i><span
+  class="badge-item">{{(cartService.cartItems$|async).length}}</span>
+</a>
+<app-overlay #cartOverlay [showClose]="false" [position]="'right'">
+  <div overlayContentRight class="container-fluid py-4 px-2">
+      <div class="row">
+          <div class="col-12 d-flex justify-content-between align-items-center ">
+              <div class="h4">{{'My cart'}}</div>
+              <i (click)="cartOverlay.close()" class="bi bi-x-lg clickable"></i>
+          </div>
+          <div class="divider my-2"></div>
+      </div>
+      <div class="row cart-items has-scrollbar" *ngIf="(cartService.cartItems$|async).length">
+          <div class="col-12" *ngFor="let item of (cartService.cartItems$|async)">
+              <div class="d-flex w-100 flex-column gap-1 align-items-start justify-content-start">
+                  <div class="cart-item">
+                      <img class="clickable" (click)="[localStorageConfig.navigate('/products',item.productItem.productId),cartOverlay.close()]" [src]="item?.productImageUrl | imgBaseUrl" onerror="this.src='assets/images/placeholder/2.png'" alt>
+                      <div class="d-flex flex-column h-100 justify-content-between">
+                          <div class="d-flex flex-column justify-content-start">
+                              <h6 class="clickable hover-secondary" (click)="[localStorageConfig.navigate('/products',item.productItem.productId),cartOverlay.close()]">
+                                  {{item?.productName}}
+                              </h6>
+                              <span class="text-muted d-flex align-items-cener gap-2">
+                {{item?.quantity}} <i class="bi-x-lg"></i> <span>{{
+                  item?.productItem.price |number:'0.2'|stCurrency }} </span>
+                              </span>
+                          </div>
+                          <span class="py-1 clickable remove-item" (click)="removeCartItem(item)"><i
+                class="bi bi-trash-fill text-st-primary"></i>
+              {{'Remove'}}</span>
+                      </div>
+                      <span class="price m-auto">{{item.productItem.price |number:'0.2'
+            |stCurrency}}</span>
+                  </div>
+              </div>
+              <div class="divider my-1"></div>
+          </div>
+      </div>
+
+      <div class="row my-2" *ngIf="(cartService.cartItems$|async).length" style="position: absolute; bottom:10px;">
+          <div class="col-12 w-100 d-flex justify-content-between align-items-center mb-2 px-3">
+              <span class="text-muted">{{'Subtotal'}}:</span>
+              <span class="text-accent fs-base ">{{cartService.cartTotalPrice |
+        number:'0.2'|stCurrency }}</span>
+          </div>
+          <div class="col-12 w-100">
+              <button mat-raised-button color="primary" class="w-100 mb-2" (click)="[localStorageConfig.navigate('/shop/cart'),cartOverlay.close()]">{{'view cart'}}</button>
+              <button mat-stroked-button color="primary" class="w-100" (click)="cartOverlay.close()">{{'continue shopping'}}</button>
+          </div>
+      </div>
+      <div class="row" *ngIf="!(cartService.cartItems$|async).length">
+          <div class="col-12 text-center">
+              <p>{{'Your cart is empty!!'}}</p>
+          </div>
+      </div>
+
+  </div>
+</app-overlay>

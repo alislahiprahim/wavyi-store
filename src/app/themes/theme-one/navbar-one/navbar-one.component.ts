@@ -15,6 +15,9 @@ import { Menu } from '../../../interfaces/menu';
 import { StCurrencyPipe } from '../../../pipes/st-currency.pipe';
 import { OverlayComponent } from '../../../components/overlay/overlay.component';
 import { CollapseComponent } from '../../../components/collapse/collapse.component';
+import { NavbarCartComponent } from '../../../components/navbar-cart/navbar-cart.component';
+import { NavbarProfileComponent } from '../../../components/navbar-profile/navbar-profile.component';
+import { SidenavComponent } from '../../../components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-navbar-one',
@@ -24,14 +27,11 @@ import { CollapseComponent } from '../../../components/collapse/collapse.compone
     NgIf,
     NgFor,
     DropdownComponent,
-    AsyncPipe,
     ImgBaseUrlPipe,
-    MatMenuModule,
-    MatDialogModule,
-    StCurrencyPipe,
-    DecimalPipe,
-    OverlayComponent,
-    CollapseComponent
+    CollapseComponent,
+    NavbarCartComponent,
+    NavbarProfileComponent,
+    SidenavComponent
   ],
   templateUrl: './navbar-one.component.html',
   styleUrl: './navbar-one.component.css',
@@ -44,38 +44,22 @@ export class NavbarOneComponent {
   @HostListener('window:scroll', [])
   onScroll(): void {
     // Check the scroll position
-    // if (window.pageYOffset >= 120) { // Adjust the scroll threshold as needed
-    //   this.isNavbarFixed = true;
-    // } else {
-    //   this.isNavbarFixed = false;
-    // }
+    if (window.pageYOffset >= 120) { // Adjust the scroll threshold as needed
+      this.isNavbarFixed = true;
+    } else {
+      this.isNavbarFixed = false;
+    }
   }
 
   constructor(
     public localStorageConfig: LocalStorageConfigService,
     public categoryService: CategoryServices,
-    private authService: AuthService,
-    public cartService: CartService,
-    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.cartService.getCartItems()
-
-  }
-
-  openAuth(type: 'login' | 'register') {
-    const modalRef = this.dialog.open(AuthUiComponent)
-    modalRef.componentInstance.type = type;
+    this.categoryService.getAllCategories();
   }
 
 
-  removeCartItem(item: any) {
-    this.cartService.removeCartItem(item.id);
-  }
-
-  logOut() {
-    this.authService.logOut();
-  }
 
 }

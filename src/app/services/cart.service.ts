@@ -54,7 +54,6 @@ export class CartService {
     let url: any = '';
     this.localStorageConfig.Token ? url = `GetUserCart/${URLS.USER}/${URLS.CART}/${this.localStorageConfig.storeSettings.storeId}` : url = `${URLS.ANONYMOUS_USER}/${this.localStorageConfig.anonyomousUserId}/${URLS.CART}`;
 
-    console.log('url', url);
     this.reqBase.get(url).subscribe({
       next: (res) => {
         this.cartItems$.next(res.data);

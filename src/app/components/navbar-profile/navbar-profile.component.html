@@ -1,0 +1,27 @@
+<a class="clickable" [matMenuTriggerFor]="menu"><i class="fa-regular fa-circle-user"></i></a>
+<mat-menu #menu="matMenu">
+
+  <div class="w-100" *ngIf="!localStorageConfig.Token">
+    <div class="d-flex flex-column w-100 align-items-start justify-content-center px-2">
+      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="authModal.openAuth('login')">
+        <i class="bi bi-box-arrow-in-right"></i> {{'Login'}}
+      </div>
+      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="authModal.openAuth('register')">
+        <i class="bi bi-person-plus"></i> {{'Register'}}
+      </div>
+    </div>
+  </div>
+  <div class="w-100" *ngIf="localStorageConfig.Token">
+    <div class="d-flex flex-column w-100 align-items-start justify-content-center px-2">
+      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="localStorageConfig.navigate('/profile','1')">
+        <i class="bi bi-person"></i> {{'Profile'}}
+      </div>
+      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="localStorageConfig.navigate('/profile','1')">
+        <i class="bi bi-clipboard"></i> {{'Orders'}}
+      </div>
+      <div class="w-100 d-flex gap-2 p-1 clickable hover-primary" (click)="logOut()">
+        <i class="bi bi-box-arrow-in-left"></i> {{'Logout'}}
+      </div>
+    </div>
+  </div>
+</mat-menu>

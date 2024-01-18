@@ -1,0 +1,46 @@
+<a class="clickable">
+  <i class="fa-solid fa-bars" (click)="overlay.open()"></i>
+</a>
+
+<app-overlay #overlay [position]="'right'">
+  <div overlayContentRight class="container-fluid ">
+      <div class="row">
+          <div class="col-12 w-100 overlay-nav-items d-flex flex-column align-items-start justify-content-center gap-2">
+              <div class="w-100 hover-primary clickable" (click)="[localStorageConfig.navigate('/'),overlay.close()]">{{'Home' }}
+              </div>
+              <div class="w-100 hover-primary clickable" (click)="[localStorageConfig.navigate('/products','',{sortBy:'ByAddedDateDesc'}),overlay.close()]">{{'New arrival' }}
+              </div>
+              <div class="w-100 hover-primary clickable" (click)="[localStorageConfig.navigate('/products','',{sortBy:'ByBestSale'}),overlay.close()]">{{'Best selling' }}
+              </div>
+              <!-- <div class="w-100 hover-primary clickable" (click)="[localStorageConfig.navigate('/products','',{sortBy:'0'}),overlay.close()]">
+                {{'Products' }}</div> -->
+              <div class="divider my-3" *ngIf="(categoryService.items()).length"></div>
+              <div class="w-100 d-flex flex-column gap-2" *ngIf="(categoryService.items()).length">
+                  <h4>{{'Categories'}}</h4>
+                  <ng-container *ngFor="let item of (categoryService.items())">
+                      <app-collapse class="w-100" [title]="item.title??''">
+                          <div collapseContent *ngFor="let child of item.children">
+                              <span class="py-1 hover-primary clickable" (click)="[localStorageConfig.navigate('/products','',{categoryId:child.id}),overlay.close()]">{{child.title}}</span>
+                          </div>
+                      </app-collapse>
+                  </ng-container>
+              </div>
+              <div class="divider my-3"></div>
+              <ng-container *ngIf="localStorageConfig.Token;else authTemp">
+                  <div class="w-100 hover-primary clickable" (click)="localStorageConfig.navigate('/profile','1')"><i class="bi bi-person"></i> {{'My profile' }}</div>
+                  <div class="w-100 hover-primary clickable" (click)="localStorageConfig.navigate('/profile','2')"><i class="bi bi-clipboard"></i> {{'My orders' }}</div>
+                  <div class="w-100 hover-primary clickable" (click)="[logOut(),overlay.close()]"><i class="bi bi-box-arrow-in-left"></i> {{'Logout' }}
+                  </div>
+              </ng-container>
+              <ng-template #authTemp>
+                  <div class="w-100 d-flex gap-2 clickable hover-primary" (click)="authModal.openAuth('login')">
+                      <i class="bi bi-box-arrow-in-right"></i> Login
+                  </div>
+                  <div class="w-100 d-flex gap-2 clickable hover-primary" (click)="authModal.openAuth('register')">
+                      <i class="bi bi-person-plus"></i> {{'Register'}}
+                  </div>
+              </ng-template>
+          </div>
+      </div>
+  </div>
+</app-overlay>
