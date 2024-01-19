@@ -1,0 +1,21 @@
+<footer class="footer">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-social-icons ">
+                    <!-- Add your social icons here -->
+                    <a *ngIf="storeSettings.storeFacebook && (storeSettings.storeFacebook !='null') " href="{{storeSettings.storeFacebook}}"><i class="bi bi-facebook"></i></a>
+                    <a *ngIf="storeSettings.storeTwitter && (storeSettings.storeTwitter !='null') " href="{{storeSettings.storeTwitter}}"><i class="bi bi-twitter"></i></a>
+                    <a *ngIf="storeSettings.storeInstagram && (storeSettings.storeInstagram !='null') " href="{{storeSettings.storeInstagram}}"><i class="bi bi-instagram"></i></a>
+                    <a *ngIf="storeSettings.storeThunder && (storeSettings.storeThunder !='null') " href="{{storeSettings.storeThunder}}"><i class="bi bi-flag"></i></a>
+                </div>
+            </div>
+            <div class="col-12">
+                <p *ngIf="storeSettings.address !='null' && storeSettings.address">{{storeSettings.address}}</p>
+            </div>
+            <div class="col-12">
+                <small >&copy; Powered by <a href="https://wavyi.com">wavyi</a></small>
+            </div>
+        </div>
+    </div>
+</footer>

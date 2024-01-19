@@ -1,0 +1,29 @@
+.footer {
+    border-top: 1px solid #e9e9e9;
+    /* Add a border at the top */
+    padding: 20px 0;
+    /* Add padding to increase footer size */
+    background-color: #f8f9fa;
+    height: 150px;
+}
+
+.footer-social-icons {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    /* Add spacing below social icons */
+}
+
+.footer-social-icons a {
+    font-size: 2rem;
+    /* Adjust icon size */
+    /* Add spacing between icons */
+    color: var(--theme-primary);
+    /* Set icon color */
+}
+
+.bi-flag {
+    transform: rotate(15deg);
+}

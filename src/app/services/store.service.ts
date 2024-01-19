@@ -8,7 +8,7 @@ import { LocalStorageConfigService } from "./localStorageConfig.service";
 import { ApiResponse } from "../interfaces/response";
 import { isPlatformBrowser } from "@angular/common";
 import { AnonymousUserService } from "./anonymous-user.service";
-import { concatMap, finalize, of } from "rxjs";
+import { Observable, concatMap, finalize, of } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -26,51 +26,29 @@ export class StoreService {
     private anonymousUser: AnonymousUserService
   ) { }
 
-  getStoreSettings() {
-    this.localStorageConfig.loadingStore.set(true);
-    // const now = new Date();
-    // if (!this.localStorageConfig.storeExists() || !this.localStorageConfig.getData(VALUES.STORE_CACHE_TIME) || parseFloat(this.localStorageConfig.getData(VALUES.STORE_CACHE_TIME) || '') < now.getTime()) {
-    this.reqBase.get<any>('').pipe(
-      concatMap((res) => {
-        if (res.data.storeId) {
-          this.localStorageConfig.setData(VALUES.STORE_DATA, JSON.stringify(res.data));
-          this.localStorageConfig.setData(VALUES.STORE_ID, res.data.storeId);
-          // this.localStorageConfig.setData(VALUES.STORE_CACHE_TIME, new Date().getTime() + this.storeCashingtime * 60 * 1000);
-          this.localStorageConfig.setData(VALUES.IS_READY, 1);
-        } else {
-          this.router.navigate(['/error']);
-          this.localStorageConfig.setData(VALUES.IS_READY, 0);
-          // Returning an observable with empty result to satisfy concatMap
-        }
-        return this.anonymousUser.createAnonymousUser();
-      })
-    ).subscribe({
-      next: (res) => {
-        // This block will be executed after the last observable completes
-        if (res)
-          this.localStorageConfig.setData(VALUES.ANONYMOUS_USER_ID, res)
-        if (isPlatformBrowser(this.platformId)) {
-          const styleTag = document.createElement('style');
-          const favIcon: any = document.querySelector('#favIcon');
-          document.head.appendChild(styleTag);
-          styleTag.innerHTML = this.generateCsstheme(
-            this.localStorageConfig.storeSettings?.primaryColour,
-            this.localStorageConfig.storeSettings?.secondaryColour,
-            this.localStorageConfig.storeSettings?.textStyle
-          );
-          favIcon.href = (`${environment.imgURL}/${this.localStorageConfig.storeSettings.imageUrl}`);
-        }
-        this.titleService.setTitle(this.localStorageConfig.storeSettings.storeName ?? 'Store');
-
-        this.localStorageConfig.loadingStore.set(false);
-        if (this.router.url.includes('error')) {
-          this.router.navigate(['/']);
-        }
-
-      }
-    })
-    // }
+  getStoreSettings(): Observable<any> {
+    return this.reqBase.get<any>('')
   }
+
+  setStoreSetings(storeData: any) {
+     this.localStorageConfig.setData(VALUES.STORE_DATA, JSON.stringify(storeData));
+    this.localStorageConfig.setData(VALUES.STORE_ID, storeData.storeId);
+    // this.localStorageConfig.setData(VALUES.STORE_CACHE_TIME, new Date().getTime() + this.storeCashingtime * 60 * 1000);
+    this.localStorageConfig.setData(VALUES.IS_READY, 1);
+    if (isPlatformBrowser(this.platformId)) {
+      const styleTag = document.createElement('style');
+      const favIcon: any = document.querySelector('#favIcon');
+      document.head.appendChild(styleTag);
+      styleTag.innerHTML = this.generateCsstheme(
+        this.localStorageConfig.storeSettings?.primaryColour,
+        this.localStorageConfig.storeSettings?.secondaryColour,
+        this.localStorageConfig.storeSettings?.textStyle
+      );
+      favIcon.href = (`${environment.imgURL}/${this.localStorageConfig.storeSettings.imageUrl}`);
+    }
+    this.titleService.setTitle(this.localStorageConfig.storeSettings.storeName ?? 'Store');
+  }
+
   generateCsstheme(primaryColor: string, secondaryColor: string, fontFamily: string): string {
     return `
       :root {
@@ -82,4 +60,5 @@ export class StoreService {
       }
     `;
   }
+
 }

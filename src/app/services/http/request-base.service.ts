@@ -13,20 +13,13 @@ import { isPlatformBrowser } from '@angular/common';
 export class RequestBase {
 
   private apiUrl = environment.apiURL;
-  private headers: any;
-  private hostName: string = ''
-  // Add a default header
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any, private http: HttpClient, private loaderService: LoaderService) {
-    if (isPlatformBrowser(this.platformId)) {
-      this.hostName = location.host.split('.')[0]
-    }
+  constructor(private http: HttpClient, private loaderService: LoaderService) {
   }
 
   private getRequestOptions(headers?: HttpHeaders, params?: HttpParams): Object {
-    const mergedHeaders = headers ? { ...headers, 'X-Subdomain': this.hostName } : { 'X-Subdomain': this.hostName };
     return {
-      headers: mergedHeaders,
+      headers: headers || new Headers(),
       params: params || new HttpParams()
     };
   }
@@ -37,7 +30,7 @@ export class RequestBase {
     if (enableLoader) {
       this.startLoader();
     }
-    return this.http.get<ApiResponse<T>>(`${this.apiUrl}/${url}`, options)
+    return this.http.get<ApiResponse<T>>(`${this.apiUrl}${url}`, options)
       .pipe(
         catchError(this.handleError),
         finalize(() => {
@@ -55,7 +48,7 @@ export class RequestBase {
       this.startLoader();
     }
 
-    return this.http.post<ApiResponse<T>>(`${this.apiUrl}/${url}`, data, options)
+    return this.http.post<ApiResponse<T>>(`${this.apiUrl}${url}`, data, options)
       .pipe(
         catchError(this.handleError),
         finalize(() => {
@@ -73,7 +66,7 @@ export class RequestBase {
       this.startLoader();
     }
 
-    return this.http.put<ApiResponse<T>>(`${this.apiUrl}/${url}`, data, options)
+    return this.http.put<ApiResponse<T>>(`${this.apiUrl}${url}`, data, options)
       .pipe(
         catchError(this.handleError),
         finalize(() => {
@@ -91,7 +84,7 @@ export class RequestBase {
       this.startLoader();
     }
 
-    return this.http.delete<ApiResponse<T>>(`${this.apiUrl}/${url}`, options)
+    return this.http.delete<ApiResponse<T>>(`${this.apiUrl}${url}`, options)
       .pipe(
         catchError(this.handleError),
         finalize(() => {
@@ -114,12 +107,10 @@ export class RequestBase {
 
   private startLoader(): void {
     this.loaderService.loading$.set(true)
-    console.log('Loader started');
   }
 
   private stopLoader(): void {
     this.loaderService.loading$.set(false)
-    console.log('Loader stopped');
   }
 }
 
