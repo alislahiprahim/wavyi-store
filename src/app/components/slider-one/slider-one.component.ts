@@ -16,7 +16,7 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]);
   imports: [NgFor, ImgBaseUrlPipe, NgStyle, SwiperModule, MatButtonModule],
   templateUrl: './slider-one.component.html',
   styleUrl: './slider-one.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('fadeInOut', [
       state('void', style({ opacity: 0 })),
@@ -27,8 +27,8 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectFade, Autoplay]);
 export class SliderOneComponent implements OnInit {
   navigation: boolean = true;
   config: SwiperOptions = {
-    effect: 'fade',
-    fadeEffect: { crossFade: true },
+    effect: 'slide',
+    // fadeEffect: { crossFade: true },
     speed: 300,
     autoplay: { delay: 3500, pauseOnMouseEnter: false, disableOnInteraction: false, stopOnLastSlide: false },
     slidesPerView: 1,

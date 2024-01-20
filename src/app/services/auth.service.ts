@@ -106,7 +106,7 @@ export class AuthService {
     this.CartService.cartItems$.next([])
     this.CartService.calcCartTotalCount();
     this.CartService.CalcCartTotalPrice();
-    this.anonymousUserService.createAnonymousUser()
+    // this.anonymousUserService.createAnonymousUser()
     this.router.navigate(['/']);
 
   }

@@ -1,20 +1,20 @@
 <swiper [config]="config">
-  @for(poster of posters; track poster){
-  <ng-template swiperSlide>
-      <div class="slider" [@fadeInOut] [ngStyle]="{ background: 'url(' + (poster.image | imgBaseUrl) + ') no-repeat center center/ cover' }">
-          <div class="dots-layer"></div>
-          <div class="container row ">
-              <div class="col-md-6 slider-content">
-                  <h2>{{poster?.title}}</h2>
-                  <p>{{poster?.description}}</p>
-                  <a [href]="poster?.linking"><button mat-raised-button>Contact Us Now</button></a>
-                  <!-- <div class="content-telephone"> <i class="bi bi-telephone"></i> <a href="tel:+0522048295">+0522048295</a></div> -->
-              </div>
-          </div>
-          <!-- <div class="slider-overlay"></div> -->
-      </div>
-  </ng-template>
-  <!-- <div class="swiper-pagination"></div> -->
-  }
+    @for(poster of posters; track poster){
+    <ng-template swiperSlide>
+        <div class="slider" [@fadeInOut] [ngStyle]="{ background: 'url(' + (poster.image | imgBaseUrl) + ') no-repeat center center/ cover' }">
+            <div class="dots-layer"></div>
+            <div class="container row ">
+                <div class="col-md-6 slider-content">
+                    <h2>{{poster?.title}}</h2>
+                    <p>{{poster?.description}}</p>
+                    <a [href]="poster?.linking"><button mat-raised-button>Contact Us Now</button></a>
+                    <!-- <div class="content-telephone"> <i class="bi bi-telephone"></i> <a href="tel:+0522048295">+0522048295</a></div> -->
+                </div>
+            </div>
+            <!-- <div class="slider-overlay"></div> -->
+        </div>
+    </ng-template>
+    <!-- <div class="swiper-pagination"></div> -->
+    }
 
 </swiper>

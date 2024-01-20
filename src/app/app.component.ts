@@ -25,10 +25,9 @@ export class AppComponent implements OnInit {
     this.storeService.getStoreSettings()
       .pipe(
         tap((res) => {
-          console.log('res', res);
           this.storeService.setStoreSetings(res.data)
         }),
-        switchMap((storeData: any) => this.anonymousUser.createAnonymousUser()))
+        switchMap((res: any) => this.anonymousUser.createAnonymousUser(res.data)))
       .subscribe(userId => this.localstorgConfig.setData(VALUES.ANONYMOUS_USER_ID, userId));
   }
 }

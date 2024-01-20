@@ -26,10 +26,10 @@ export const appConfig: ApplicationConfig = {
         [subDomainInterceptor]
       ),
       withInterceptorsFromDi(),
-      withFetch()
+      // withFetch()
     ),
     provideRouter(routes),
-    provideClientHydration(),
+    // provideClientHydration(),
     {
       provide: ROUTES,
       useFactory: setTheme,

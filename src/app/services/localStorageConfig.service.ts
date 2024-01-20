@@ -74,4 +74,8 @@ export class LocalStorageConfigService {
     });
   }
 
+  get hostName(): string {
+    return this.isBrowser ? location.host.split('.')[0] : '';
+  }
+
 }

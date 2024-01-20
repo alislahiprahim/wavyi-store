@@ -16,10 +16,10 @@ import { Subject, takeUntil } from 'rxjs';
   providers: [HomeService],
   template: `
   <app-slider-one [posters]="posters"></app-slider-one>
-  `,
+   `,
 
   styleUrl: './home-one.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeOneComponent implements OnInit, OnDestroy {
 
@@ -32,8 +32,8 @@ export class HomeOneComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (res) => {
-          console.log(res)
           this.posters = res.data;
+          console.log('this.posters', this.posters)
         },
         error: (err) => {
           this.posters = [];

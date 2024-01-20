@@ -14,7 +14,8 @@ export class AnonymousUserService implements DestroySubscription {
   subscriptions: { [key: string]: Subscription; } = {};
   constructor(private reqBase: RequestBase, private localStorageConfig: LocalStorageConfigService) { }
 
-  createAnonymousUser(): Observable<any> {
+  createAnonymousUser(storeData: any): Observable<any> {
+    if (storeData.storeName != this.localStorageConfig.hostName) this.localStorageConfig.removeItem(VALUES.ANONYMOUS_USER_ID)
     if (!this.localStorageConfig.getData(VALUES.ANONYMOUS_USER_ID)) {
       return this.reqBase.post<any>(URLS.ANONYMOUS_USER, {})
     }
